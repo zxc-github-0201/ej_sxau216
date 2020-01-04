@@ -21,7 +21,7 @@
     <el-pagination layout="prev, pager, next" :total="50"></el-pagination>
 
 <!-- 模态框 -->
-    <el-dialog : ="title" :visible.sync="visible" width="60%" >
+    <el-dialog :title="title" :visible.sync="visible" width="60%" >
       <el-form :model="form" label-width="80px">
         <el-form-item label="内容">
           <el-input v-model="form.content"></el-input>
