@@ -13,7 +13,7 @@
             <el-table-column fixed="right" label="操作">
                 <template v-slot="slot">
                     <a href="" @click.prevent="toDeleteHandler(slot.row.id)">删除</a>
-                    <a href="" @click.prevent="toUpdateHandler">修改</a>
+                    <a href="" @click.prevent="toUpdateHandler(slot.row)">修改</a>
                 </template>
             </el-table-column>
         </el-table>
@@ -109,7 +109,7 @@ export default {
                 //模态框关闭
                 this.closeModalHandler();
                 //刷新
-                this.loadData;
+                this.loadData();
                 //提示消息
                 this.$message({
                     type:"success",
@@ -117,27 +117,45 @@ export default {
                 })
             })
         },
-        toDeleteHandler(){
+        toDeleteHandler(id){
             // 确认
             this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
-             confirmButtonText: '确定',
+            confirmButtonText: '确定',
             cancelButtonText: '取消',
-             type: 'warning'
+            type: 'warning'
             }).then(() => {
-             this.$message({
-            type: 'success',
-            message: '删除成功!'
+            //调用后台接口，完成删除操作
+            let url = "http://localhost:6677/product/deleteById?id="+id;
+                request.get(url).then((response)=>{
+                //1.刷新数据
+                this.loadData()
+                //2.提示结果
+                this.$message({
+                type: 'success',
+                message: response.message
              });
             })
+            })
         },
-        toUpdateHandler(){
+        toUpdateHandler(row){
+            //模态框的表单显示当前行信息
+            this.form = row ;
             this.visible = true;
         },
         closeModalHandler(){
             this.visible = false;
         },
         toAddHandler(){
+            let url = "http://localhost:6677/category/findAll"
+            request.get(url).then((response)=>{
+                this.options = response.data;
+                this.loadData();
+            })
+            this.form ={
+                type:"products"
+            }
             this.visible = true;
+            
         }
     },
     data(){
