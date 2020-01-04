@@ -34,13 +34,14 @@
                 <el-form-item label="所属栏目">
                     <el-select v-model="form.categoryId" placeholder="请选择">
                         <el-option v-for="item in options"
-                            :key="item.value" :label="item.name"
-                            :value="item.parentId">
+                            :key="item.id" 
+                            :label="item.name"
+                            :value="item.id">
                         </el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="介绍">
-                    <el-input v-model="form.description"></el-input>
+                    <el-input type="textarea" v-model="form.description"></el-input>
                 </el-form-item>
                 <el-form-item label="产品主图">
                     <el-upload
