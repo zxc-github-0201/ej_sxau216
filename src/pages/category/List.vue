@@ -109,7 +109,7 @@ export default {
             this.visible = true;
         },
         closeModalHandler(){
-            this.visible = true;
+            this.visible = false;
         },  
         toAddHandler(){
             this.form ={
