@@ -9,7 +9,8 @@
             <el-table-column prop="name" label="产品名称"></el-table-column>
             <el-table-column prop="price" label="价格"></el-table-column>
             <el-table-column prop="description" label="描述"></el-table-column>
-            <el-table-column prop="categoryId" label="所属产品"></el-table-column>
+            <el-table-column prop="categoryId" label="所属分类"></el-table-column>
+            <el-table-column width="650px" prop="photo" label="图片"></el-table-column>
             <el-table-column fixed="right" label="操作">
                 <template v-slot="slot">
                     <a href="" @click.prevent="toDeleteHandler(slot.row.id)">删除</a>
@@ -40,20 +41,16 @@
                         </el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="介绍">
+                <el-form-item label="描述">
                     <el-input type="textarea" v-model="form.description"></el-input>
                 </el-form-item>
-                <el-form-item label="产品主图">
+                <el-form-item label="图片">
                     <el-upload
                         class="upload-demo"
-                        action="https://jsonplaceholder.typicode.com/posts/"
-                        :on-preview="handlePreview"
-                        :on-remove="handleRemove"
-                        :before-remove="beforeRemove"
-                        multiple
-                        :limit="3"
-                        :on-exceed="handleExceed"
-                        :file-list="fileList">
+                        action="http://134.175.154.93:6677/file/upload"
+                        :on-success = "uploadSuccessHandler"
+                        :file-list="fileList"
+                        list-type="picture">
                         <el-button size="small" type="primary">点击上传</el-button>
                         <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
                     </el-upload>
@@ -72,6 +69,13 @@ import request from '@/utils/request'
 import querystring from 'querystring'
 export default {
     methods:{
+        //上传成功的事件处理函数
+        uploadSuccessHandler(response){
+            let photo = "http://134.175.154.93:8888/group1/"+response.data.id;
+            console.log(response);
+            //将图片地址设置到form中，便于一起提交给后台
+            this.form.photo = photo;
+        },
         handleRemove(file, fileList) {
             console.log(file, fileList);
          },
@@ -140,13 +144,16 @@ export default {
         },
         toUpdateHandler(row){
             //模态框的表单显示当前行信息
+            this.fileList = [];
             this.form = row ;
+            
             this.visible = true;
         },
         closeModalHandler(){
             this.visible = false;
         },
         toAddHandler(){
+            this.fileList = [];
             let url = "http://localhost:6677/category/findAll"
             request.get(url).then((response)=>{
                 this.options = response.data;
@@ -160,15 +167,15 @@ export default {
         }
     },
     data(){
-        {
-        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
-      };
+        
         return{
             visible:false,
             products:[],
+            options:[],
             form:{
                 
-            }
+            },
+            fileList:[]
             
         }
     },

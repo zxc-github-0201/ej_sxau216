@@ -85,7 +85,7 @@ export default {
                 //模态框关闭
                 this.closeModalHandler();
                 //刷新
-                this.loadData;
+                this.loadData();
                 //提示消息
                 this.$message({
                     type:"success",
