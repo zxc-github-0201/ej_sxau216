@@ -28,8 +28,7 @@
         <el-dialog
             :title="title"
             :visible.sync="visible"
-            width="60%">  
-            测试{{form}}        
+            width="60%">         
             <el-form :model="form" label-width="80px">
                 <el-form-item label="栏目名称">
                     <el-input v-model="form.name"/>
