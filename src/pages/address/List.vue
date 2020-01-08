@@ -75,14 +75,14 @@ export default {
     //用于存放页面中需要调用的方法
     methods:{
     loadData(){
-        let url="http://localhost:6677/address/findAll";
+        let url="http://123.56.247.188:6677/address/findAll";
         request.get(url).then((response)=>{
             this.addresses = response.data;
         })
     },
         submitHandler(){
             
-            let url = "http://localhost:6677/address/saveOrUpdate";
+            let url = "http://123.56.247.188:6677/address/saveOrUpdate";
             request({
                 url,
                 method:"POST",
@@ -111,7 +111,7 @@ export default {
             type: 'warning'
             }).then(() => {
             //调用后台接口，完成删除操作
-            let url = "http://localhost:6677/address/deleteById?id="+id;
+            let url = "http://123.56.247.188:6677/address/deleteById?id="+id;
             request.get(url).then((response)=>{
                 //1.刷新数据
                 this.loadData()
@@ -130,7 +130,7 @@ export default {
             this.visible = true;
         },
         closeModalHandler(){
-            this.visible = true;
+            this.visible = false;
         },  
         toAddHandler(){
             this.form ={

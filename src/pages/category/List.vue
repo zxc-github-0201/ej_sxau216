@@ -54,14 +54,14 @@ export default {
     //用于存放页面中需要调用的方法
     methods:{
     loadData(){
-        let url="http://localhost:6677/category/findAll";
+        let url="http://123.56.247.188:6677/category/findAll";
         request.get(url).then((response)=>{
             this.categorys = response.data;
         })
     },
         submitHandler(){
             
-            let url = "http://localhost:6677/category/saveOrUpdate";
+            let url = "http://123.56.247.188:6677/category/saveOrUpdate";
             request({
                 url,
                 method:"POST",
@@ -90,7 +90,7 @@ export default {
             type: 'warning'
             }).then(() => {
             //调用后台接口，完成删除操作
-            let url = "http://localhost:6677/category/deleteById?id="+id;
+            let url = "http://123.56.247.188:6677/category/deleteById?id="+id;
             request.get(url).then((response)=>{
                 //1.刷新数据
                 this.loadData()
