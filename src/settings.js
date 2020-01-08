@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: '家政预约平台',
+  title: '216鞋店',
 
   /**
    * @type {boolean} true | false

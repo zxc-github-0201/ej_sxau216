@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{params}}
     <!-- 选项卡 -->
     <el-tabs v-model="params.status" @tab-click="loadData">
       <el-tab-pane label="所有订单" name="所有订单"></el-tab-pane>
@@ -46,7 +45,7 @@
               <p> <strong>订单总价：</strong> {{form.total}} </p>
               <p> <strong>下单时间：</strong> {{form.orderTime}} </p>
               <p>
-                <strong>服务员工：</strong>
+                <strong>派送员工：</strong>
                   <el-radio-group v-model="waiterId">
                   <el-radio
                     border
@@ -86,7 +85,10 @@ export default {
         this.employees = response.data;
       })
     },
-    getOrderLinesByOrderId() {},
+    //订单详情
+    getOrderLinesByOrderId() {
+      
+    },
     //加载订单信息
     loadData() {
       let url = "http://123.56.247.188:6677/order/queryPage";

@@ -120,7 +120,7 @@ export default {
     //用于存放要向网页中存放的数据
     data(){
         return{
-            title:"录入地址信息",
+            title:"添加栏目信息",
             visible:false,
             categorys:[],
             form:{

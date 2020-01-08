@@ -129,7 +129,7 @@ export default {
             this.visible = true;
         },
         closeModalHandler(){
-            this.visible = true;
+            this.visible = false;
         },  
         toAddHandler(){
             this.form ={
@@ -141,7 +141,7 @@ export default {
     //用于存放要向网页中存放的数据
     data(){
         return{
-            title:"录入地址信息",
+            title:"录入员工信息",
             visible:false,
             employees:[],
             form:{
